@@ -2,6 +2,7 @@ const hosts = [
   'www.forbes.com',
   'www.sltrib.com',
   'www.usatoday.com',
+  'www.washingtonpost.com',
 ]
 
 chrome.runtime.onInstalled.addListener(function () {
