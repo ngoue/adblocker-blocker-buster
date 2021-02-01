@@ -1,4 +1,5 @@
 const hosts = [
+  'www.businessinsider.com',
   'www.forbes.com',
   'www.sltrib.com',
   'www.usatoday.com',

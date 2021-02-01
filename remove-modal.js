@@ -37,6 +37,7 @@ function _removeElementsByClassName(className, exact) {
  * This works for any tp-modal.
  *
  * Tested:
+ * https://www.businessinsider.com
  * https://www.forbes.com
  * https://www.sltrib.com
  */
