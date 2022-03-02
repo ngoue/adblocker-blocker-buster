@@ -4,6 +4,8 @@ const hosts = [
   'www.sltrib.com',
   'www.usatoday.com',
   'www.washingtonpost.com',
+  'www.kbb.com',
+  'www.nytimes.com',
 ]
 
 chrome.runtime.onInstalled.addListener(function () {

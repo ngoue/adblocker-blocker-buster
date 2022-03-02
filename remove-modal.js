@@ -3,8 +3,9 @@
  * <body>. This is a common method used on most sites so we re-use it a
  * few places.
  */
-function _clearOverflowHidden() {
-  for (let item of [document.documentElement, document.body]) {
+function _clearOverflowHidden(elements) {
+  let others = elements || []
+  for (let item of [document.documentElement, document.body].concat(others)) {
     item.style.overflowY = 'auto'
   }
 }
@@ -31,6 +32,11 @@ function _removeElementsByClassName(className, exact) {
     console.log('removing item: ' + item.toString())
     item.remove()
   }
+}
+
+function _removeElementById(id) {
+  let element = document.getElementById(id)
+  element.remove()
 }
 
 /**
@@ -75,7 +81,34 @@ function customWashingtonPost() {
   _clearOverflowHidden()
 }
 
+/**
+ * Custom Overlay
+ *
+ * Tested:
+ * https://www.kbb.com
+ */
+function customKelleyBlueBook() {
+  _removeElementsByClassName('whitelist-overlay-modal-background')
+  _clearOverflowHidden()
+}
+
+/**
+ * Custom Overlay
+ *
+ * Tested:
+ * https://www.nytimes.com
+ */
+function customNyTimes() {
+  let overflowEl = document.getElementById('app').children[0].children[0]
+  let shader = overflowEl.children[overflowEl.children.length-1]
+  _removeElementById('gateway-content')
+  _clearOverflowHidden([overflowEl])
+  shader.remove()
+}
+
 // TODO: try invoking functions based on the host
 tpModal()
 sourcepoint()
 customWashingtonPost()
+customKelleyBlueBook()
+customNyTimes()
