@@ -4,7 +4,7 @@
   "description": "A powerful Chrome extension designed to remove annoying pop-ups and modals that prevent you from viewing content when an AdBlocker is enabled. Enjoy a seamless browsing experience without interruptions.",
   "version": "0.1",
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "index.html",
     "default_icon": "default_icon.png"
   },
   "permissions": ["tabs", "activeTab"]
