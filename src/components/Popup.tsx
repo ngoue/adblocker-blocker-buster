@@ -1,17 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { report } from "../lib";
 
 export default function Popup() {
+  const [pageUrl, setPageUrl] = useState<string>();
   const [loading, setLoading] = useState<string | null>();
 
-  const handleManual = async () => {
-    setLoading("manual");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-    setLoading(null);
-  };
+  useEffect(() => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      let activeTab = tabs[0];
+      setPageUrl(activeTab.url);
+    });
+  }, []);
 
-  const handleReport = async () => {
-    setLoading("report");
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+  const handleAction = async (action: "report" | "manual") => {
+    if (!pageUrl) {
+      return;
+    }
+
+    setLoading(action);
+    report(action, pageUrl);
     setLoading(null);
   };
 
@@ -28,10 +35,18 @@ export default function Popup() {
           issue.
         </p>
         <div className="actions">
-          <button id="manual" onClick={handleManual} disabled={!!loading}>
+          <button
+            id="manual"
+            onClick={() => handleAction("manual")}
+            disabled={loading === "manual"}
+          >
             {loading === "manual" ? "Removing..." : "Remove blockers manually"}
           </button>
-          <button id="report" onClick={handleReport} disabled={!!loading}>
+          <button
+            id="report"
+            onClick={() => handleAction("report")}
+            disabled={loading === "report"}
+          >
             {loading === "report" ? "Reporting..." : "Report an issue"}
           </button>
         </div>
