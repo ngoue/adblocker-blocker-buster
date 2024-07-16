@@ -1,5 +1,6 @@
 main {
-  min-width: 340px;
+  min-width: 280px;
+  padding: 8px;
 }
 
 h1 {
